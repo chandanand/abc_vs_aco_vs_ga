@@ -37,4 +37,24 @@ public class Node {
     public void addFalseConditionNode(Node node) {
         falseConditionNode = node;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Node node = (Node) o;
+
+        return lineNumber == node.lineNumber;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return lineNumber;
+    }
+
+    public int getLineNumber() {
+        return lineNumber;
+    }
 }

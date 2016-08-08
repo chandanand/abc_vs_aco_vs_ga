@@ -1,16 +1,19 @@
 package de.chandanand.abc.program;
 
 import de.chandanand.abc.model.Graph;
+import de.chandanand.abc.model.Paths;
 
 /**
  * Created by chand on 7/8/16.
  */
 public class TriangleClassifier extends Program {
-    
+
     private Graph controlFlowGraph;
 
     public TriangleClassifier() {
         complexity = 8;
+        numberOfInputVariables = 3;
+        range = 20;
         controlFlowGraph = createControlFlowGraph();
         controlFlowGraphRoot = controlFlowGraph.getNode(1);
     }
@@ -53,5 +56,32 @@ public class TriangleClassifier extends Program {
         controlFlowGraph.getNode(23).addTrueConditionNode(controlFlowGraph.getNode(24));
 
         return controlFlowGraph;
+    }
+
+    @Override
+    public int program(Paths paths, int a, int b, int c) {
+        if ((a < (b + c)) && (b < (c + a)) && (c < (a + b))) {
+            if ((a == b) && (b == c))
+                return (paths.getPathNumberHavingNode(4));
+            else if ((a != b) && (b != c) && (c != a))
+                return (paths.getPathNumberHavingNode(6));
+            else {
+                if ((a == b))
+                    return (paths.getPathNumberHavingNode(9));
+                else if (b == c)
+                    return (paths.getPathNumberHavingNode(11));
+                else if (c == a)
+                    return (paths.getPathNumberHavingNode(13));
+            }
+        } else {
+            if (a >= (b + c))
+                return (paths.getPathNumberHavingNode(18));
+            else if (b >= (c + a))
+                return (paths.getPathNumberHavingNode(20));
+            else
+                return (paths.getPathNumberHavingNode(22));
+        }
+
+        return 0;
     }
 }

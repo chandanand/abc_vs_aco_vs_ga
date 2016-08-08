@@ -1,7 +1,7 @@
 package de.chandanand.abc;
 
 import de.chandanand.abc.algorithm.ABC;
-import de.chandanand.abc.model.Paths;
+import de.chandanand.abc.model.*;
 import de.chandanand.abc.program.Program;
 import de.chandanand.abc.program.ProgramStrategy;
 
@@ -25,6 +25,31 @@ public class ABCRunner {
             return;
         }
 
+        Long startTime = System.nanoTime();
+
         Paths controlFlowPaths = abc.getControlFlowPaths(program);
+        TestSuite testSuite = abc.testSuiteGeneration(controlFlowPaths, program);
+
+        Long endTime = System.nanoTime();
+
+        System.out.println("Time: " + ((endTime - startTime) * Math.pow(10, -9)) + " sec");
     }
+
+    public static void displayTestSuite(TestSuite testSuite) {
+        for (TestCase testCase: testSuite.getTestCases()) {
+            System.out.print("(");
+            for (Integer value: testCase.getVariableSet())
+                System.out.print(value + ",");
+            System.out.print(");");
+        }
+    }
+
+    public static void displayPaths(Paths paths) {
+        for (Path path: paths.getPaths())
+            for (Node node: path.getNodes())
+                System.out.print(node.lineNumber + "->");
+        System.out.println();
+    }
+
+
 }
