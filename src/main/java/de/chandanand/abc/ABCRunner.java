@@ -2,8 +2,8 @@ package de.chandanand.abc;
 
 import de.chandanand.abc.algorithm.ABC;
 import de.chandanand.abc.model.*;
-import de.chandanand.abc.program.Program;
-import de.chandanand.abc.program.ProgramStrategy;
+import de.chandanand.program.Program;
+import de.chandanand.program.ProgramStrategy;
 
 /**
  * Created by chand on 7/8/16.

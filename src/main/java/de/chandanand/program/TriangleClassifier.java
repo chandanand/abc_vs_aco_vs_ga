@@ -1,4 +1,4 @@
-package de.chandanand.abc.program;
+package de.chandanand.program;
 
 import de.chandanand.abc.model.Graph;
 import de.chandanand.abc.model.Paths;

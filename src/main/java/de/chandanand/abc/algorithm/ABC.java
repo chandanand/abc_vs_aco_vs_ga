@@ -1,8 +1,7 @@
 package de.chandanand.abc.algorithm;
 
-import de.chandanand.abc.ABCRunner;
 import de.chandanand.abc.model.*;
-import de.chandanand.abc.program.Program;
+import de.chandanand.program.Program;
 
 import java.util.ArrayList;
 import java.util.List;
