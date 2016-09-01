@@ -15,6 +15,8 @@ public class ProgramStrategy {
             program = new LeapYear();
         else if ("Marks".equalsIgnoreCase(programName))
             program = new Marks();
+        else if ("MaximumOfThree".equalsIgnoreCase(programName))
+            program = new MaximumOfThree();
 
         return program;
     }
