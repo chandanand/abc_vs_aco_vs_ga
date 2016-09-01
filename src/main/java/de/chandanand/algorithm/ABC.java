@@ -1,7 +1,7 @@
-package de.chandanand.abc.algorithm;
+package de.chandanand.algorithm;
 
-import de.chandanand.abc.model.*;
-import de.chandanand.program.Program;
+import de.chandanand.common.model.*;
+import de.chandanand.common.program.Program;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,8 +107,8 @@ public class ABC {
 
     private void evaluateTestCases(TestSuite testSuite, Paths paths, Program program) {
         for (TestCase testCase : testSuite.getTestCases()) {
-            int pathNumber = program.program(paths, testCase.getVariable(0),
-                    testCase.getVariable(1), testCase.getVariable(2));
+            List<Integer> variables = testCase.getVariableSet();
+            int pathNumber = program.program(paths, variables);
             testCase.satisfyingPath = pathNumber + 1;
 
             if (pathNumber != -1)

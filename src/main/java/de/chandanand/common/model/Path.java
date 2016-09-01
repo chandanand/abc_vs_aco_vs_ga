@@ -1,4 +1,4 @@
-package de.chandanand.abc.model;
+package de.chandanand.common.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,7 @@ public class Path {
     private double tempFitness;
     private double fitnessValue;
     private double probability;
+    public double strength;
 
 
     public void loopOptimization(Node startNode) {

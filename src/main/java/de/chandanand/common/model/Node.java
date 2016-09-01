@@ -1,5 +1,7 @@
-package de.chandanand.abc.model;
+package de.chandanand.common.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -11,10 +13,15 @@ public class Node {
     public Node trueConditionNode;
     public Node falseConditionNode;
     private int fitness;
+    public boolean visited;
+    public List<Node> feasibleSet = new ArrayList<>();
+    private boolean even;
 
     public Node(int lineNumber) {
         generateFitness();
         this.lineNumber = lineNumber;
+        this.even = true;
+        this.visited = false;
     }
 
     private void generateFitness() {
@@ -54,7 +61,13 @@ public class Node {
         return lineNumber;
     }
 
-    public int getLineNumber() {
-        return lineNumber;
+    public void addInFeasibleSet(Node node) {
+        if (even) {
+            feasibleSet.add(0, node);
+            even = false;
+        } else {
+            feasibleSet.add(1, node);
+            even = true;
+        }
     }
 }

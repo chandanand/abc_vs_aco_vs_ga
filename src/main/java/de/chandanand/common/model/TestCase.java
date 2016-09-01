@@ -1,4 +1,4 @@
-package de.chandanand.abc.model;
+package de.chandanand.common.model;
 
 import java.util.ArrayList;
 import java.util.List;

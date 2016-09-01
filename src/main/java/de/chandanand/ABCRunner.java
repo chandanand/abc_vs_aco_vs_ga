@@ -1,9 +1,9 @@
-package de.chandanand.abc;
+package de.chandanand;
 
-import de.chandanand.abc.algorithm.ABC;
-import de.chandanand.abc.model.*;
-import de.chandanand.program.Program;
-import de.chandanand.program.ProgramStrategy;
+import de.chandanand.algorithm.ABC;
+import de.chandanand.common.model.*;
+import de.chandanand.common.program.Program;
+import de.chandanand.common.program.ProgramStrategy;
 
 /**
  * Created by chand on 7/8/16.
@@ -33,22 +33,6 @@ public class ABCRunner {
         Long endTime = System.nanoTime();
 
         System.out.println("Time: " + ((endTime - startTime) * Math.pow(10, -9)) + " sec");
-    }
-
-    public static void displayTestSuite(TestSuite testSuite) {
-        for (TestCase testCase: testSuite.getTestCases()) {
-            System.out.print("(");
-            for (Integer value: testCase.getVariableSet())
-                System.out.print(value + ",");
-            System.out.print(");");
-        }
-    }
-
-    public static void displayPaths(Paths paths) {
-        for (Path path: paths.getPaths())
-            for (Node node: path.getNodes())
-                System.out.print(node.lineNumber + "->");
-        System.out.println();
     }
 
 
