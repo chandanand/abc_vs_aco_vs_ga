@@ -16,7 +16,7 @@ public class Quadrant extends Program {
         range = 20;
         controlFlowGraph = createControlFlowGraph();
         controlFlowGraphRoot = controlFlowGraph.getNode(1);
-        controlFlowGraphEndNode = controlFlowGraph.getNode(8);
+        controlFlowGraphEndNode = controlFlowGraph.getNode(10);
     }
 
     private Graph createControlFlowGraph() {

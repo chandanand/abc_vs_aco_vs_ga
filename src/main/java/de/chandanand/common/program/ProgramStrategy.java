@@ -21,6 +21,8 @@ public class ProgramStrategy {
             program = new PointCircle();
         else if ("Quadrant".equalsIgnoreCase(programName))
             program = new Quadrant();
+        else if ("QuadraticEquation".equalsIgnoreCase(programName))
+            program = new QuadraticEquation();
 
         return program;
     }
