@@ -23,6 +23,8 @@ public class ProgramStrategy {
             program = new Quadrant();
         else if ("QuadraticEquation".equalsIgnoreCase(programName))
             program = new QuadraticEquation();
+        else if ("Remainder".equalsIgnoreCase(programName))
+            program = new Remainder();
 
         return program;
     }
