@@ -13,6 +13,8 @@ public class ProgramStrategy {
             program = new EvenOdd();
         else if ("LeapYear".equalsIgnoreCase(programName))
             program = new LeapYear();
+        else if ("Marks".equalsIgnoreCase(programName))
+            program = new Marks();
 
         return program;
     }
