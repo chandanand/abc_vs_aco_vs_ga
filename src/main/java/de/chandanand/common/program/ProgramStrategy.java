@@ -17,6 +17,8 @@ public class ProgramStrategy {
             program = new Marks();
         else if ("MaximumOfThree".equalsIgnoreCase(programName))
             program = new MaximumOfThree();
+        else if ("PointCircle".equalsIgnoreCase(programName))
+            program = new PointCircle();
 
         return program;
     }
