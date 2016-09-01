@@ -11,6 +11,8 @@ public class ProgramStrategy {
             program = new TriangleClassifier();
         else if ("EvenOdd".equalsIgnoreCase(programName))
             program = new EvenOdd();
+        else if ("LeapYear".equalsIgnoreCase(programName))
+            program = new LeapYear();
 
         return program;
     }
