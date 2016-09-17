@@ -10,9 +10,12 @@ Within the download you'll find the following directories and files. You'll see 
 ```
 src/main/java/de/chandanand
 ├── algorithm/
-│   └── ABC.java
+│   ├── ABC.java
+│   └── GA.java
 ├── common/
 │   ├── module/
+│   │   ├── Chromosome.java
+│   │   ├── Edge.java
 │   │   ├── Graph.java
 │   │   ├── Node.java
 │   │   ├── Path.java
@@ -31,7 +34,8 @@ src/main/java/de/chandanand
 │       ├── QuadraticEquation.java
 │       ├── Remainder.java
 │       └── TriangleClassifier.java
-└── ABCRunner.java
+├── ABCRunner.java
+└── GARunner.java
 ```
 
 
