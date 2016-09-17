@@ -16,7 +16,7 @@ public class Graph {
     }
 
     public Node getNode(int index) {
-        return nodes.get(index);
+        return nodes.get(index-1);
     }
 
     public void addEdge(Node from, Node to) {

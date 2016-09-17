@@ -1,8 +1,8 @@
 package de.chandanand.common.program;
 
-import de.chandanand.common.model.Graph;
-import de.chandanand.common.model.Paths;
+import de.chandanand.common.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +17,11 @@ public class TriangleClassifier extends Program {
         controlFlowGraph = createControlFlowGraph();
         controlFlowGraphRoot = controlFlowGraph.getNode(1);
         controlFlowGraphEndNode = controlFlowGraph.getNode(24);
+        
+        decisionTree = createDecisionTree();
+        decisionTreeRoot = decisionTree.getNode(1);
+        decisionTreePaths = decisionTreePathGeneration();
+        leaves = getLeaves();
     }
 
     private Graph createControlFlowGraph() {
@@ -120,4 +125,199 @@ public class TriangleClassifier extends Program {
 
         return 0;
     }
+
+    @Override
+    public int getLeafByEvaluation(Chromosome chromosome) {
+        int a = chromosome.realData.get(0).intValue();
+        int b = chromosome.realData.get(1).intValue();
+        int c = chromosome.realData.get(2).intValue();
+
+        if ( (a < (b+c)) && (b < (c+a)) && (c < (a+b)) ) {
+            if ( (a == b) && (b == c) )
+                return 4;
+            else if ( (a!=b) && (b!=c) && (c!=a) )
+                return 6;
+            else {
+                if ((a==b))
+                    return 9;
+                else if (b==c)
+                    return 11;
+                else if (c==a)
+                    return 13;
+            }
+        }
+        else {
+            if (a>=(b+c))
+                return 18;
+            else if (b>=(c+a))
+                return 20;
+            else
+                return 22;
+        }
+
+        return 0;
+    }
+
+    private Graph createDecisionTree() {
+        Graph decisionTree = new Graph();
+
+        for(int i = 1; i <= 24; i++)
+            decisionTree.newNode(i);
+
+        decisionTree.getNode(1).addTrueConditionNode(decisionTree.getNode(2));
+        decisionTree.getNode(2).addTrueConditionNode(decisionTree.getNode(3));
+        decisionTree.getNode(2).addNeutralConditionNode(decisionTree.getNode(24));
+        decisionTree.getNode(2).addFalseConditionNode(decisionTree.getNode(16));
+        decisionTree.getNode(3).addTrueConditionNode(decisionTree.getNode(4));
+        decisionTree.getNode(3).addNeutralConditionNode(decisionTree.getNode(15));
+        decisionTree.getNode(3).addFalseConditionNode(decisionTree.getNode(5));
+        decisionTree.getNode(5).addTrueConditionNode(decisionTree.getNode(6));
+        decisionTree.getNode(5).addFalseConditionNode(decisionTree.getNode(7));
+        decisionTree.getNode(7).addTrueConditionNode(decisionTree.getNode(8));
+        decisionTree.getNode(8).addTrueConditionNode(decisionTree.getNode(9));
+        decisionTree.getNode(8).addNeutralConditionNode(decisionTree.getNode(14));
+        decisionTree.getNode(8).addFalseConditionNode(decisionTree.getNode(10));
+        decisionTree.getNode(10).addTrueConditionNode(decisionTree.getNode(11));
+        decisionTree.getNode(10).addFalseConditionNode(decisionTree.getNode(12));
+        decisionTree.getNode(12).addTrueConditionNode(decisionTree.getNode(13));
+        decisionTree.getNode(16).addTrueConditionNode(decisionTree.getNode(17));
+        decisionTree.getNode(17).addTrueConditionNode(decisionTree.getNode(18));
+        decisionTree.getNode(17).addNeutralConditionNode(decisionTree.getNode(23));
+        decisionTree.getNode(17).addFalseConditionNode(decisionTree.getNode(19));
+        decisionTree.getNode(19).addTrueConditionNode(decisionTree.getNode(20));
+        decisionTree.getNode(19).addFalseConditionNode(decisionTree.getNode(22));
+
+        return decisionTree;
+    }
+
+    private Paths decisionTreePathGeneration() {
+        Paths decisionTreePaths = new Paths();
+        
+        Path newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(3));
+        newPath.addNode(decisionTree.getNode(4));
+        decisionTreePaths.addPath(newPath);
+        
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(3));
+        newPath.addNode(decisionTree.getNode(15));
+        decisionTreePaths.addPath(newPath);
+        
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(3));
+        newPath.addNode(decisionTree.getNode(5));
+        newPath.addNode(decisionTree.getNode(6));
+        decisionTreePaths.addPath(newPath);
+        
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(3));
+        newPath.addNode(decisionTree.getNode(5));
+        newPath.addNode(decisionTree.getNode(7));
+        newPath.addNode(decisionTree.getNode(8));
+        newPath.addNode(decisionTree.getNode(9));
+        decisionTreePaths.addPath(newPath);
+        
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(3));
+        newPath.addNode(decisionTree.getNode(5));
+        newPath.addNode(decisionTree.getNode(7));
+        newPath.addNode(decisionTree.getNode(8));
+        newPath.addNode(decisionTree.getNode(10));
+        newPath.addNode(decisionTree.getNode(11));
+        decisionTreePaths.addPath(newPath);
+        
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(3));
+        newPath.addNode(decisionTree.getNode(5));
+        newPath.addNode(decisionTree.getNode(7));
+        newPath.addNode(decisionTree.getNode(8));
+        newPath.addNode(decisionTree.getNode(10));
+        newPath.addNode(decisionTree.getNode(14));
+        decisionTreePaths.addPath(newPath);
+        
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(3));
+        newPath.addNode(decisionTree.getNode(5));
+        newPath.addNode(decisionTree.getNode(7));
+        newPath.addNode(decisionTree.getNode(8));
+        newPath.addNode(decisionTree.getNode(10));
+        newPath.addNode(decisionTree.getNode(12));
+        newPath.addNode(decisionTree.getNode(13));
+        decisionTreePaths.addPath(newPath);
+        
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(16));
+        newPath.addNode(decisionTree.getNode(17));
+        newPath.addNode(decisionTree.getNode(18));
+        decisionTreePaths.addPath(newPath);
+        
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(24));
+        decisionTreePaths.addPath(newPath);
+        
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(16));
+        newPath.addNode(decisionTree.getNode(17));
+        newPath.addNode(decisionTree.getNode(23));
+        decisionTreePaths.addPath(newPath);
+        
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(16));
+        newPath.addNode(decisionTree.getNode(17));
+        newPath.addNode(decisionTree.getNode(23));
+        decisionTreePaths.addPath(newPath);
+        
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(16));
+        newPath.addNode(decisionTree.getNode(17));
+        newPath.addNode(decisionTree.getNode(19));
+        newPath.addNode(decisionTree.getNode(21));
+        newPath.addNode(decisionTree.getNode(22));
+        decisionTreePaths.addPath(newPath);
+
+        return decisionTreePaths;
+    }
+    
+    private List<Node> getLeaves() {
+        List<Node> leaves = new ArrayList<>();
+        leaves.add(decisionTree.getNode(6));
+        leaves.add(decisionTree.getNode(20));
+        leaves.add(decisionTree.getNode(18));
+        leaves.add(decisionTree.getNode(22));
+        leaves.add(decisionTree.getNode(9));
+        leaves.add(decisionTree.getNode(13));
+        leaves.add(decisionTree.getNode(11));
+        leaves.add(decisionTree.getNode(14));
+        leaves.add(decisionTree.getNode(23));
+        leaves.add(decisionTree.getNode(24));
+        leaves.add(decisionTree.getNode(15));
+        leaves.add(decisionTree.getNode(4));
+        return leaves;
+    }
+
+
 }

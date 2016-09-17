@@ -95,4 +95,8 @@ public class Path {
     public double getProbability() {
         return probability;
     }
+
+    public Node getNode(int index) {
+        return nodes.get(index);
+    }
 }

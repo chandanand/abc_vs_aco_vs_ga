@@ -23,6 +23,10 @@ public class Paths {
         return paths.size();
     }
 
+    public Path getPathHavingPathNumber(int pathNumber) {
+        return paths.get(pathNumber);
+    }
+
     public int getPathNumberHavingNode(int nodeNumber) {
         int pathNumber = 0;
         for (Path path: paths) {

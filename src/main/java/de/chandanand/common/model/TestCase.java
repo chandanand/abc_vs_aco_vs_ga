@@ -9,6 +9,7 @@ import java.util.List;
 public class TestCase {
 
     private List<Integer> variableSet = new ArrayList<>();
+    public int satisfyingNode;
     public int satisfyingPath;
 
     public void addValue(Integer testValue) {

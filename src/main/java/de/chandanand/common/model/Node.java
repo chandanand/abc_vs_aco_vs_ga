@@ -11,6 +11,7 @@ public class Node {
 
     public int lineNumber;
     public Node trueConditionNode;
+    public Node neutralConditionNode;
     public Node falseConditionNode;
     private int fitness;
     public boolean visited;
@@ -39,6 +40,10 @@ public class Node {
 
     public void addTrueConditionNode(Node node) {
         trueConditionNode = node;
+    }
+
+    public void addNeutralConditionNode(Node node) {
+        neutralConditionNode = node;
     }
 
     public void addFalseConditionNode(Node node) {
