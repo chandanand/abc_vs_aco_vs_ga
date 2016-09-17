@@ -132,24 +132,23 @@ public class TriangleClassifier extends Program {
         int b = chromosome.realData.get(1).intValue();
         int c = chromosome.realData.get(2).intValue();
 
-        if ( (a < (b+c)) && (b < (c+a)) && (c < (a+b)) ) {
-            if ( (a == b) && (b == c) )
+        if ((a < (b + c)) && (b < (c + a)) && (c < (a + b))) {
+            if ((a == b) && (b == c))
                 return 4;
-            else if ( (a!=b) && (b!=c) && (c!=a) )
+            else if ((a != b) && (b != c) && (c != a))
                 return 6;
             else {
-                if ((a==b))
+                if ((a == b))
                     return 9;
-                else if (b==c)
+                else if (b == c)
                     return 11;
-                else if (c==a)
+                else if (c == a)
                     return 13;
             }
-        }
-        else {
-            if (a>=(b+c))
+        } else {
+            if (a >= (b + c))
                 return 18;
-            else if (b>=(c+a))
+            else if (b >= (c + a))
                 return 20;
             else
                 return 22;
@@ -161,7 +160,7 @@ public class TriangleClassifier extends Program {
     private Graph createDecisionTree() {
         Graph decisionTree = new Graph();
 
-        for(int i = 1; i <= 24; i++)
+        for (int i = 1; i <= 24; i++)
             decisionTree.newNode(i);
 
         decisionTree.getNode(1).addTrueConditionNode(decisionTree.getNode(2));
@@ -192,21 +191,21 @@ public class TriangleClassifier extends Program {
 
     private Paths decisionTreePathGeneration() {
         Paths decisionTreePaths = new Paths();
-        
+
         Path newPath = new Path();
         newPath.addNode(decisionTree.getNode(1));
         newPath.addNode(decisionTree.getNode(2));
         newPath.addNode(decisionTree.getNode(3));
         newPath.addNode(decisionTree.getNode(4));
         decisionTreePaths.addPath(newPath);
-        
+
         newPath = new Path();
         newPath.addNode(decisionTree.getNode(1));
         newPath.addNode(decisionTree.getNode(2));
         newPath.addNode(decisionTree.getNode(3));
         newPath.addNode(decisionTree.getNode(15));
         decisionTreePaths.addPath(newPath);
-        
+
         newPath = new Path();
         newPath.addNode(decisionTree.getNode(1));
         newPath.addNode(decisionTree.getNode(2));
@@ -214,7 +213,7 @@ public class TriangleClassifier extends Program {
         newPath.addNode(decisionTree.getNode(5));
         newPath.addNode(decisionTree.getNode(6));
         decisionTreePaths.addPath(newPath);
-        
+
         newPath = new Path();
         newPath.addNode(decisionTree.getNode(1));
         newPath.addNode(decisionTree.getNode(2));
@@ -224,7 +223,7 @@ public class TriangleClassifier extends Program {
         newPath.addNode(decisionTree.getNode(8));
         newPath.addNode(decisionTree.getNode(9));
         decisionTreePaths.addPath(newPath);
-        
+
         newPath = new Path();
         newPath.addNode(decisionTree.getNode(1));
         newPath.addNode(decisionTree.getNode(2));
@@ -235,7 +234,7 @@ public class TriangleClassifier extends Program {
         newPath.addNode(decisionTree.getNode(10));
         newPath.addNode(decisionTree.getNode(11));
         decisionTreePaths.addPath(newPath);
-        
+
         newPath = new Path();
         newPath.addNode(decisionTree.getNode(1));
         newPath.addNode(decisionTree.getNode(2));
@@ -246,7 +245,7 @@ public class TriangleClassifier extends Program {
         newPath.addNode(decisionTree.getNode(10));
         newPath.addNode(decisionTree.getNode(14));
         decisionTreePaths.addPath(newPath);
-        
+
         newPath = new Path();
         newPath.addNode(decisionTree.getNode(1));
         newPath.addNode(decisionTree.getNode(2));
@@ -258,7 +257,7 @@ public class TriangleClassifier extends Program {
         newPath.addNode(decisionTree.getNode(12));
         newPath.addNode(decisionTree.getNode(13));
         decisionTreePaths.addPath(newPath);
-        
+
         newPath = new Path();
         newPath.addNode(decisionTree.getNode(1));
         newPath.addNode(decisionTree.getNode(2));
@@ -266,13 +265,13 @@ public class TriangleClassifier extends Program {
         newPath.addNode(decisionTree.getNode(17));
         newPath.addNode(decisionTree.getNode(18));
         decisionTreePaths.addPath(newPath);
-        
+
         newPath = new Path();
         newPath.addNode(decisionTree.getNode(1));
         newPath.addNode(decisionTree.getNode(2));
         newPath.addNode(decisionTree.getNode(24));
         decisionTreePaths.addPath(newPath);
-        
+
         newPath = new Path();
         newPath.addNode(decisionTree.getNode(1));
         newPath.addNode(decisionTree.getNode(2));
@@ -280,7 +279,7 @@ public class TriangleClassifier extends Program {
         newPath.addNode(decisionTree.getNode(17));
         newPath.addNode(decisionTree.getNode(23));
         decisionTreePaths.addPath(newPath);
-        
+
         newPath = new Path();
         newPath.addNode(decisionTree.getNode(1));
         newPath.addNode(decisionTree.getNode(2));
@@ -288,7 +287,7 @@ public class TriangleClassifier extends Program {
         newPath.addNode(decisionTree.getNode(17));
         newPath.addNode(decisionTree.getNode(23));
         decisionTreePaths.addPath(newPath);
-        
+
         newPath = new Path();
         newPath.addNode(decisionTree.getNode(1));
         newPath.addNode(decisionTree.getNode(2));
@@ -301,7 +300,7 @@ public class TriangleClassifier extends Program {
 
         return decisionTreePaths;
     }
-    
+
     private List<Node> getLeaves() {
         List<Node> leaves = new ArrayList<>();
         leaves.add(decisionTree.getNode(6));

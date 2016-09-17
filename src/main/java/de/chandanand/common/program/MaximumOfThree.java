@@ -1,8 +1,8 @@
 package de.chandanand.common.program;
 
-import de.chandanand.common.model.Graph;
-import de.chandanand.common.model.Paths;
+import de.chandanand.common.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +17,11 @@ public class MaximumOfThree extends Program {
         controlFlowGraph = createControlFlowGraph();
         controlFlowGraphRoot = controlFlowGraph.getNode(1);
         controlFlowGraphEndNode = controlFlowGraph.getNode(8);
+
+        decisionTree = createDecisionTree();
+        decisionTreeRoot = decisionTree.getNode(1);
+        decisionTreePaths = decisionTreePathGeneration();
+        leaves = getLeaves();
     }
 
     private Graph createControlFlowGraph() {
@@ -49,5 +54,78 @@ public class MaximumOfThree extends Program {
             return (paths.getPathNumberHavingNode(5));
         else
             return (paths.getPathNumberHavingNode(7));
+    }
+
+    @Override
+    public int getLeafByEvaluation(Chromosome chromosome) {
+        int a = chromosome.realData.get(0).intValue();
+        int b = chromosome.realData.get(1).intValue();
+        int c = chromosome.realData.get(2).intValue();
+
+        if (a >= b && a >= c)
+            return 3;
+        else if (b >= a && b >= c)
+            return 5;
+        else
+            return 7;
+    }
+
+    private Graph createDecisionTree() {
+        Graph decisionTree = new Graph();
+
+        for (int i = 1; i <= 8; i++)
+            decisionTree.newNode(i);
+
+        decisionTree.getNode(1).addTrueConditionNode(decisionTree.getNode(2));
+        decisionTree.getNode(2).addTrueConditionNode(decisionTree.getNode(3));
+        decisionTree.getNode(2).addNeutralConditionNode(decisionTree.getNode(8));
+        decisionTree.getNode(2).addFalseConditionNode(decisionTree.getNode(4));
+        decisionTree.getNode(4).addTrueConditionNode(decisionTree.getNode(5));
+        decisionTree.getNode(4).addFalseConditionNode(decisionTree.getNode(6));
+        decisionTree.getNode(6).addTrueConditionNode(decisionTree.getNode(7));
+
+        return decisionTree;
+    }
+
+    private Paths decisionTreePathGeneration() {
+        Paths decisionTreePaths = new Paths();
+
+        Path newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(3));
+        decisionTreePaths.addPath(newPath);
+
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(8));
+        decisionTreePaths.addPath(newPath);
+
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(3));
+        newPath.addNode(decisionTree.getNode(4));
+        decisionTreePaths.addPath(newPath);
+
+        newPath = new Path();
+        newPath.addNode(decisionTree.getNode(1));
+        newPath.addNode(decisionTree.getNode(2));
+        newPath.addNode(decisionTree.getNode(4));
+        newPath.addNode(decisionTree.getNode(6));
+        newPath.addNode(decisionTree.getNode(7));
+        decisionTreePaths.addPath(newPath);
+
+        return decisionTreePaths;
+    }
+
+    private List<Node> getLeaves() {
+        List<Node> leaves = new ArrayList<>();
+        leaves.add(decisionTree.getNode(3));
+        leaves.add(decisionTree.getNode(5));
+        leaves.add(decisionTree.getNode(7));
+        leaves.add(decisionTree.getNode(8));
+        return leaves;
     }
 }
