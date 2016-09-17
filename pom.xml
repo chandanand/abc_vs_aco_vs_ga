@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.chandanand</groupId>
-    <artifactId>abc_vs_aco_vs_ga</artifactId>
+    <artifactId>automated_test_suite</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <name>Artificial Bee Colony vs.
