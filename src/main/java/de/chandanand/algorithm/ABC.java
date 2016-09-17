@@ -70,12 +70,9 @@ public class ABC {
 
         divideIntoSets(paths, program);
 
-        List<Integer> testCaseData = new ArrayList<>();
         iteration = 0;
 
         while ((!checkPathSatisfaction(paths)) && iteration < 50) {
-            testCaseData.add(testSuite.getSize());
-
             for (int setValue = 1; setValue <= numberOfSets; setValue++) {
                 double totalFitness = fitnessCalculation(setValue, paths);
                 double averageProbability = probabilityCalculation(setValue, totalFitness, paths);
